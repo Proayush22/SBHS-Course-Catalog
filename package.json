@@ -1,5 +1,6 @@
 {
   "name": "school-courses",
+  "homepage": "https://proayush22.github.io/SBHS-Course-Catalog",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,9 +8,12 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "gh-pages": "^6.3.0",
     "lucide-react": "^0.511.0",
     "papaparse": "^5.5.3",
     "react": "^19.1.0",
