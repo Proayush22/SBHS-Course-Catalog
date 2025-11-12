@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Menu, X, ChevronDown, ChevronUp, BookOpen, ExternalLink } from 'lucide-react';
+import { Search, Menu, X, ChevronDown, BookOpen, ExternalLink } from 'lucide-react';
 import Papa from 'papaparse';
 
 interface Course {
