@@ -64,7 +64,7 @@ const Navbar: React.FC<{
           </button>
           <div className={`flex items-center space-x-2 transition-all duration-300 ${hasSearchTerm ? 'lg:hidden xl:flex' : ''}`}>
             <img 
-              src="/logo.jpg" 
+              src={`${import.meta.env.BASE_URL}photo.png`} 
               alt="Logo" 
               className="h-13 w-13 transition-transform duration-200 hover:scale-105 cursor-pointer" 
               onClick={onLogoClick}
@@ -521,7 +521,7 @@ const CourseApp: React.FC = () => {
   useEffect(() => {
     const loadCourses = async () => {
       try {
-        const response = await fetch('/courses.csv');
+        const response = await fetch(`${import.meta.env.BASE_URL}data.csv`);
         const csvText = await response.text();
         
         Papa.parse(csvText, {
