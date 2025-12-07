@@ -521,7 +521,28 @@ const CourseApp: React.FC = () => {
   useEffect(() => {
     const loadCourses = async () => {
       try {
-        const response = await fetch(`${import.meta.env.BASE_URL}data.csv`);
+        // Construct the URL ensuring we handle trailing slashes correctly
+        const baseUrl = import.meta.env.BASE_URL.endsWith('/') 
+          ? import.meta.env.BASE_URL 
+          : `${import.meta.env.BASE_URL}/`;
+          
+        const url = `${baseUrl}data.csv`;
+        
+        console.log('Attempting to fetch from:', url); // For debugging
+
+        const response = await fetch(url);
+        
+        // Check if the fetch was actually successful
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        // Ensure we actually got a CSV and not an HTML error page
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.indexOf("text/html") !== -1) {
+            throw new Error("Received HTML instead of CSV. Check file path.");
+        }
+
         const csvText = await response.text();
         
         Papa.parse(csvText, {
@@ -537,6 +558,9 @@ const CourseApp: React.FC = () => {
               specialProgramDescription: cleanHtmlTags(row['Special Program Description'] || '')
             }));
             setCourses(parsedCourses);
+          },
+          error: (error: any) => {
+              console.error('Papa Parse Error:', error);
           }
         });
       } catch (error) {
