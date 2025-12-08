@@ -526,7 +526,7 @@ const CourseApp: React.FC = () => {
           ? import.meta.env.BASE_URL 
           : `${import.meta.env.BASE_URL}/`;
           
-        const url = `${baseUrl}data.csv`;
+        const url = `${baseUrl}courses.csv`;
         
         console.log('Attempting to fetch from:', url); // For debugging
 
